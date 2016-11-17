@@ -1032,7 +1032,9 @@ def get_hostname_fqdn(cfg, cloud):
                 hostname = cfg['hostname']
             else:
                 hostname = cloud.get_hostname()
-    return (hostname, fqdn)
+    # return (hostname, fqdn)
+    # return fqdn without domain, only host name
+    return (hostname, hostname)
 
 
 def get_fqdn_from_hosts(hostname, filename="/etc/hosts"):

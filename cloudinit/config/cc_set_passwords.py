@@ -86,7 +86,13 @@ def handle(_name, cfg, cloud, log, args):
     else:
         password = util.get_cfg_option_str(cfg, "password", None)
 
-    expire = True
+    # use admin_pass key from metadata
+    if not password:
+        metadata = cloud.datasource.metadata
+        if metadata and 'admin_pass' in metadata:
+            password = metadata['admin_pass']
+
+    expire = False
     plist = None
 
     if 'chpasswd' in cfg:
